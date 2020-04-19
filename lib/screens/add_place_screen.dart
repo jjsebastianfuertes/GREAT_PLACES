@@ -46,7 +46,6 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("ERROR TITLE");
     return Scaffold(
       appBar: AppBar(
         title: Text("Add a new place"),
@@ -57,19 +56,21 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
           Expanded(
             child: SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.all(10),
+                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                 child: Column(
                   children: <Widget>[
-                    TextField(
-                      decoration: InputDecoration(labelText: "Title"),
-                      controller: _titleController,
-                    ),
-                    SizedBox(height: 10),
                     ImageInput(_selectImage),
+                    SizedBox(height: 10),
                     SizedBox(
                       height: 10,
                     ),
                     LocationInput(_selectPlace),
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: "Name of the place",
+                      ),
+                      controller: _titleController,
+                    ),
                   ],
                 ),
               ),
@@ -77,10 +78,16 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
           ),
           RaisedButton.icon(
             icon: Icon(Icons.add),
-            label: Text("Add place"),
+            label: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20.0),
+              child: Text(
+                "Add place",
+                style: TextStyle(fontSize: 16),
+              ),
+            ),
             elevation: 0,
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            color: Theme.of(context).accentColor,
+            color: Theme.of(context).primaryColor,
             onPressed: _savePlace,
           )
         ],

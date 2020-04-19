@@ -16,6 +16,7 @@ class PlaceDetailScreen extends StatelessWidget {
         title: Text(selectedPlace.title),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
             height: 250,
@@ -27,27 +28,43 @@ class PlaceDetailScreen extends StatelessWidget {
             ),
           ),
           SizedBox(height: 10),
-          Wrap(
-            children: <Widget>[
-              Text(
-                selectedPlace.title,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Theme.of(context).accentColor,
-                ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                children: <Widget>[
+                  Text(
+                    selectedPlace.title,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Theme.of(context).accentColor,
+                    ),
+                  ),
+                  Text(
+                    selectedPlace.location.address,
+                    textAlign: TextAlign.justify,
+                  ),
+                ],
               ),
-              Expanded(
-                child: Text(
-                  selectedPlace.location.address,
-                ),
-              ),
-            ],
+            ),
           ),
           SizedBox(
             height: 10,
           ),
-          FlatButton(
-            child: Text('View on Map'),
+          RaisedButton.icon(
+            icon: Icon(Icons.location_on),
+            label: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20.0),
+              child: Text(
+                'View on Map',
+                style: TextStyle(fontSize: 16),
+              ),
+            ),
+            elevation: 0,
+            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            color: Theme.of(context).primaryColor,
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
                 fullscreenDialog: true,
@@ -57,7 +74,7 @@ class PlaceDetailScreen extends StatelessWidget {
                 ),
               ));
             },
-          ),
+          )
         ],
       ),
     );

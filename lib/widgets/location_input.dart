@@ -73,8 +73,10 @@ class _LocationInputState extends State<LocationInput> {
       children: <Widget>[
         Container(
           decoration: BoxDecoration(
-            border: Border.all(width: 1, color: Theme.of(context).accentColor),
-            borderRadius: BorderRadius.circular(10),
+            border: _previewImageUrl != null
+                ? Border.all(width: 1, color: Theme.of(context).primaryColor)
+                : Border.all(width: 1, color: Theme.of(context).accentColor),
+            borderRadius: BorderRadius.circular(15),
           ),
           height: 170,
           width: double.infinity,
@@ -84,10 +86,13 @@ class _LocationInputState extends State<LocationInput> {
                   "No location Chosen",
                   textAlign: TextAlign.center,
                 )
-              : Image.network(
-                  _previewImageUrl,
-                  fit: BoxFit.cover,
-                  width: double.infinity,
+              : ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Image.network(
+                    _previewImageUrl,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                  ),
                 ),
         ),
         ButtonBar(
@@ -96,13 +101,13 @@ class _LocationInputState extends State<LocationInput> {
             FlatButton.icon(
               onPressed: _getCurrentUserLocation,
               icon: Icon(Icons.location_on),
-              textColor: Theme.of(context).primaryColor,
+              textColor: Theme.of(context).accentColor,
               label: Text("Current location"),
             ),
             FlatButton.icon(
               onPressed: _selectOnMap,
               icon: Icon(Icons.map),
-              textColor: Theme.of(context).primaryColor,
+              textColor: Theme.of(context).accentColor,
               label: Text("Select on Map"),
             ),
           ],

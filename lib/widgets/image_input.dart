@@ -42,13 +42,18 @@ class _ImageInputState extends State<ImageInput> {
           height: 100,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            border: Border.all(width: 1, color: Colors.grey),
-          ),
+              border: _storeImage != null
+                  ? Border.all(width: 1, color: Theme.of(context).primaryColor)
+                  : Border.all(width: 1, color: Theme.of(context).accentColor),
+              borderRadius: BorderRadius.circular(15)),
           child: _storeImage != null
-              ? Image.file(
-                  _storeImage,
-                  fit: BoxFit.cover,
-                  width: double.infinity,
+              ? ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Image.file(
+                    _storeImage,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                  ),
                 )
               : Text(
                   "No image taken",
